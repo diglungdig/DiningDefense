@@ -46,14 +46,15 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\AutoNav.cs" />
+     <Compile Include="Assets\Script\MusicPlayer.cs" />
      <Compile Include="Assets\StoreMenu.cs" />
      <Compile Include="Assets\generateMinions.cs" />
      <Compile Include="Assets\minion.cs" />
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
