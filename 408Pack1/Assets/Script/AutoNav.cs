@@ -5,12 +5,23 @@ public class AutoNav : MonoBehaviour {
 
     //public Transform goal;
     private NavMeshAgent agent;
+	public bool stopEnable = false;
+	public enum agentType{
+		allyMinion, enemyMinion
+	}
+	[SerializeField]
+	private agentType thisType;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = GameObject.FindGameObjectWithTag("destination").transform.position;
-        agent.updateRotation = false;
+        
+		if (thisType == agentType.allyMinion) {
+			agent.destination = GameObject.FindGameObjectWithTag ("destination").transform.position;
+		} else {
+			agent.destination = GameObject.FindGameObjectWithTag ("allyBase").transform.position;
+		}
+		agent.updateRotation = false;
     }
 
     void Update()
@@ -26,6 +37,12 @@ public class AutoNav : MonoBehaviour {
             }
 
         }
-
     }
+
+	public void stopAgent(){
+		agent.Stop();
+	}
+	public void resumeAgent(){
+		agent.Resume();
+	}
 }

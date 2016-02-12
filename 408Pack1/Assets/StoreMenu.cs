@@ -18,6 +18,8 @@ public class StoreMenu : MonoBehaviour {
             foreach(GameObject e in buttons)
             {
                 e.SetActive(boolSet);
+
+				//e.GetComponent<Button> ().enabled = false;
             }
         }
     }
