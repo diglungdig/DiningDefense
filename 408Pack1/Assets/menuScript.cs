@@ -25,12 +25,16 @@ public class menuScript : MonoBehaviour {
 		quitMenu.enabled = true;
 		startText.enabled = false;
 		exitText.enabled = false;
+		highScoresText.enabled = false;
+		settingsText.enabled = false;
 	}
 
 	public void NoPress(){
 		quitMenu.enabled = false;
 		startText.enabled = true;
 		exitText.enabled = true;
+		settingsText.enabled = true;
+		highScoresText.enabled = true;
 	}
 
 	public void StartLevel(){
