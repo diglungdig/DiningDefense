@@ -1,0 +1,17 @@
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/obj/Debug/Assembly-CSharp.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/UnityEngine.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/UnityEditor.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/Mono.Cecil.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/Unity.DataContract.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/bangqinlin/Desktop/408TowerDefense/408Pack1/Temp/bin/Debug/Mono.Cecil.Mdb.dll
