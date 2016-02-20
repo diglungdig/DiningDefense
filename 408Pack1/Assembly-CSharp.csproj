@@ -46,8 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\AutoNav.cs" />
-     <Compile Include="Assets\Script\MusicPlayer.cs" />
-     <Compile Include="Assets\ScrollingScript.cs" />
+     <Compile Include="Assets\Script\BGM.cs" />
      <Compile Include="Assets\StoreMenu.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\ImportBehaviour.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SortingLayerExposed.cs" />
@@ -58,6 +57,16 @@
      <Compile Include="Assets\generateMinions.cs" />
      <Compile Include="Assets\menuScript.cs" />
      <Compile Include="Assets\minion.cs" />
+     <None Include="Assets\Tiled2Unity\Imported\mapTiles.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
+     <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\untitled.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\License.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>

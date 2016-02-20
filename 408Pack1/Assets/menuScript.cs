@@ -10,6 +10,7 @@ public class menuScript : MonoBehaviour {
 	public Button exitText;
 	public Button highScoresText;
 	public Button settingsText;
+	
 
 	// Use this for initialization
 	void Start () {
