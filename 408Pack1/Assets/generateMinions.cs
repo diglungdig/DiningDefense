@@ -6,11 +6,16 @@ using foodDefense;
 public class generateMinions : MonoBehaviour {
 
     public Vector3 genePos;
+
+    public Transform geneSprite;
     public GameObject minion1;
     public GameObject minion2;
     public Text goldAmout;
 
-
+    void Start()
+    {
+        genePos = geneSprite.position;
+    }
 
     public void GenerateOne(int index)
     {
