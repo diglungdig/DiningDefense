@@ -55,6 +55,7 @@
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TileAnimator.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledInitialShaderProperties.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledMap.cs" />
+     <Compile Include="Assets\Zoom.cs" />
      <Compile Include="Assets\generateEnemyMinion.cs" />
      <Compile Include="Assets\generateMinions.cs" />
      <Compile Include="Assets\menuScript.cs" />
