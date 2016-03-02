@@ -6,9 +6,9 @@ public class Zoom : MonoBehaviour {
 	float curZoomPos, zoomTo; // curZoomPos will be the value
 	float zoomFrom = 20f; //Midway point between nearest and farthest zoom values (a "starting position")
 
-
 	void Update ()
 	{
+
 		// Attaches the float y to scrollwheel up or down
 		float y = Input.mouseScrollDelta.y;
 
@@ -26,14 +26,17 @@ public class Zoom : MonoBehaviour {
 		}
 
 		// creates a value to raise and lower the camera's field of view
-		curZoomPos =  zoomFrom + zoomTo;
 
+			curZoomPos = zoomFrom + zoomTo;
+		
 		curZoomPos = Mathf.Clamp (curZoomPos, 5f, 35f);
 
 		// Stops "zoomTo" value at the nearest and farthest zoom value you desire
 		zoomTo = Mathf.Clamp (zoomTo, -15f, 30f);
 
 		// Makes the actual change to Field Of View
-		Camera.main.fieldOfView = curZoomPos;
+		if (curZoomPos < 21) {
+			Camera.main.fieldOfView = curZoomPos;
+		}
 	}
 }
