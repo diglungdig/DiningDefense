@@ -10,6 +10,7 @@ public class generateMinions : MonoBehaviour {
     public Transform geneSprite;
     public GameObject minion1;
     public GameObject minion2;
+    public GameObject minion3;
     public Text goldAmout;
 
     void Start()
@@ -36,6 +37,13 @@ public class generateMinions : MonoBehaviour {
 			costMoney(costList(newObject.GetComponent<minion>().returnFoodType()));
 			//gameObject.GetComponent<Button>()
 		}
+        else if(index == 3)
+        {
+            GameObject newObject = (GameObject)Instantiate(minion3, genePos, Quaternion.Euler(90f, 180f, 180f));
+            newObject.AddComponent<minion>().thisType = food.apple;
+            newObject.GetComponent<minion>().mappingValue(food.apple);
+            costMoney(costList(newObject.GetComponent<minion>().returnFoodType()));
+        }
     }
 	
 	// Update is called once per frame
@@ -54,6 +62,8 @@ public class generateMinions : MonoBehaviour {
             return 50;
         else if (foodType == food.strawberry)
             return 100;
+        else if (foodType == food.apple)
+            return 150;
         return 0;
     }
 }
