@@ -1,33 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
-using foodDefense;
 using System;
-using UnityEngine.UI;
 
-public class Enemy : Minions {
+public class Ally : Minions {
+    //public override int pathNodeIndex = 
+
     public override void initilizePathNode()
     {
-        pathNodeIndex = 0;
+        pathNodeIndex = pathGO.transform.childCount - 1;
     }
-    public override void GetNextPathNode() {
-		if(pathNodeIndex < pathGO.transform.childCount) {
-			targetPathNode = pathGO.transform.GetChild(pathNodeIndex);
-			pathNodeIndex++;
-		}
-		else {
-			targetPathNode = null;
-			ReachedGoal();
-		}
-	}
-
+    public override void GetNextPathNode()
+    {
+        if (pathNodeIndex >= 0)
+        {
+            targetPathNode = pathGO.transform.GetChild(pathNodeIndex);
+            pathNodeIndex--;
+        }
+        else {
+            targetPathNode = null;
+            ReachedGoal();
+        }
+    }
     public override void ReachedGoal()
     {
-        GameObject.Find("Health").GetComponent<Image>().fillAmount -= 1 / 12f;
-        if (GameObject.Find("Health").GetComponent<Image>().fillAmount <= 0.1f)
-        {
-            GameObject.Find("EventSystem").GetComponent<sceneManage>().playerDeath();
-        }
         Destroy(gameObject);
+        throw new NotImplementedException();
     }
 
     void Update()

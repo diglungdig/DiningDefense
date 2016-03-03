@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using foodDefense;
+using UnityEngine.UI;
 
 public abstract class Minions : MonoBehaviour {
 
@@ -15,7 +16,7 @@ public abstract class Minions : MonoBehaviour {
 
     public Transform targetPathNode;
     public int pathNodeIndex = 0;
-    float speed = 2f;
+    public float speed = 1f;
 
     // Use this for initialization
     void Start()
@@ -61,8 +62,10 @@ public abstract class Minions : MonoBehaviour {
 
     public abstract void initilizePathNode();
     public abstract void GetNextPathNode();
+    public abstract void ReachedGoal();
 
     // Update is called once per frame
+    /*
     void Update()
     {
         if (pathGO == null)
@@ -99,11 +102,7 @@ public abstract class Minions : MonoBehaviour {
 
     }
 
-    public void ReachedGoal()
-    {
-        //GameObject.FindObjectOfType<ScoreManager2>().LoseLife();
-        Destroy(gameObject);
-    }
+    */
 
     public void TakeDamage(float damage)
     {

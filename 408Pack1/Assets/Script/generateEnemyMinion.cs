@@ -20,10 +20,19 @@ public class generateEnemyMinion : MonoBehaviour {
 	void Update () {
 	
 		startTime += Time.deltaTime;
-		if(startTime >= 5){
-			GameObject enemy = (GameObject)Instantiate (enemyMinions [0], gameObject.transform.position, Quaternion.Euler (0f, 0f, 0f));
+        if (startTime >= 9f) {
+            GameObject enemy = (GameObject)Instantiate(enemyMinions[0], gameObject.transform.position, Quaternion.Euler(0f, 0f, 0f));
             enemy.GetComponent<Enemy>().setPathIndex(pathIndex);
-			enemy.GetComponent<SpriteRenderer> ().sprite = sprites [Random.Range (0, 6)];
+
+            int i = Random.Range(0, 7);
+            if (i == 6)
+            {
+                enemy.GetComponent<Enemy>().thisType = food.Burger;
+            }
+            else {
+                enemy.GetComponent<Enemy>().thisType = food.icecream;
+            }
+            enemy.GetComponent<SpriteRenderer> ().sprite = sprites [i];
 			startTime = 0f;
 		}
 }
