@@ -1,42 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Zoom : MonoBehaviour {
+public class Zoom : MonoBehaviour
+{
 
-	float curZoomPos, zoomTo; // curZoomPos will be the value
-	float zoomFrom = 20f; //Midway point between nearest and farthest zoom values (a "starting position")
+    float curZoomPos, zoomTo; // curZoomPos will be the value
+    float zoomFrom = 19.5f; //Midway point between nearest and farthest zoom values (a "starting position")
 
-	void Update ()
-	{
+    public Vector3 zoomOrigin = new Vector3(0f, 0f, -21f);
 
-		// Attaches the float y to scrollwheel up or down
-		float y = Input.mouseScrollDelta.y;
 
-		// If the wheel goes up it, decrement 5 from "zoomTo"
-		if (y >= 1)
-		{
-			zoomTo -= 2f;
-			Debug.Log ("Zoomed In");
-		}
+    void ZoomIn()
+    {
+        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, -3f), 1 / 3f);
+    }
 
-		// If the wheel goes down, increment 5 to "zoomTo"
-		else if (y <= -1) {
-			zoomTo += 2f;
-			Debug.Log ("Zoomed Out");
-		}
+    void ZoomOut()
+    {
+        transform.position = Vector3.Lerp(transform.position, zoomOrigin, 1 / 3f);
+    }
 
-		// creates a value to raise and lower the camera's field of view
+    void Update()
+    {
 
-			curZoomPos = zoomFrom + zoomTo;
-		
-		curZoomPos = Mathf.Clamp (curZoomPos, 5f, 35f);
+       Debug.Log(Camera.main.orthographicSize);
+       if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+           
+            // Attaches the float y to scrollwheel up or down
 
-		// Stops "zoomTo" value at the nearest and farthest zoom value you desire
-		zoomTo = Mathf.Clamp (zoomTo, -15f, 30f);
+            float y = Input.GetAxis("Mouse ScrollWheel");
+            Debug.Log(y);
 
-		// Makes the actual change to Field Of View
-		if (curZoomPos < 21) {
-			Camera.main.fieldOfView = curZoomPos;
-		}
-	}
+            // If the wheel goes up it, decrement 5 from "zoomTo"
+            if (y > 0)
+            {
+                ZoomIn();
+                Debug.Log("Zoomed In");
+            }
+
+            // If the wheel goes down, increment 5 to "zoomTo"
+            else if (y < 0)
+            {
+                ZoomOut();
+                Debug.Log("Zoomed Out");
+            }
+        }
+    }
 }

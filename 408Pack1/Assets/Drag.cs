@@ -6,24 +6,32 @@ public class Drag : MonoBehaviour
 	private Vector3 dragOrigin;
 
 
-	void Update()
-	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			dragOrigin = Input.mousePosition;
-			return;
-		}
+    void Update()
+    {
+        if (Camera.main.transform.position.z > -20f)
+        {
 
-		if (!Input.GetMouseButton(0)) return;
-		Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
-		Debug.Log (pos.y);
-		if ((Camera.main.transform.position.z >= 9 && pos.y < 0) || (Camera.main.transform.position.z <= -2.75 && pos.y > 0)
-			|| (Camera.main.transform.position.z < 9 && Camera.main.transform.position.z > -2.75)) {
-			Vector3 move = new Vector3 (0, 0, pos.y * dragSpeed);
+            if (Input.GetMouseButtonDown(0))
+            {
+                dragOrigin = Input.mousePosition;
+                return;
+            }
 
-			transform.Translate (move, Space.World);
-		}
-	}
+            if (!Input.GetMouseButton(0)) return;
+            Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - dragOrigin);
 
+            Debug.Log(pos.y);
 
+            if ((Camera.main.transform.position.y >= 3 && pos.y < 0) || (Camera.main.transform.position.y <= -3 && pos.y > 0)
+                || (Camera.main.transform.position.y < 3 && Camera.main.transform.position.y > -3))
+            {
+
+                //Vector3 move = new Vector3 (0, 0, pos.y * dragSpeed);
+                Vector3 move = new Vector3(0, pos.y * dragSpeed, 0);
+
+                transform.Translate(move, Space.World);
+            }
+        }
+
+    }
 }
