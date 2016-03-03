@@ -19,7 +19,6 @@ public class StoreMenu : MonoBehaviour {
             {
                 e.SetActive(boolSet);
 
-				//e.GetComponent<Button> ().enabled = false;
             }
         }
     }

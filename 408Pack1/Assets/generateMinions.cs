@@ -12,6 +12,8 @@ public class generateMinions : MonoBehaviour {
     public GameObject minion2;
     public GameObject minion3;
     public Text goldAmout;
+    public AudioSource falseSound;
+    public int pathIndex;
 
     void Start()
     {
@@ -20,41 +22,56 @@ public class generateMinions : MonoBehaviour {
 
     public void GenerateOne(int index)
     {
-        if (index == 1)
-        {	
-			//banana
-			GameObject newObject = (GameObject)Instantiate(minion1, genePos, Quaternion.Euler(90f, 180f, 180f));
-			newObject.AddComponent<minion> ().thisType = food.banana;
-			newObject.GetComponent<minion> ().mappingValue(food.banana);  
-			costMoney(costList(newObject.GetComponent<minion>().returnFoodType()));
-        }
-        else if (index == 2)
-        {
-			//strawberry
-			GameObject newObject = (GameObject)Instantiate(minion2, genePos, Quaternion.Euler(90f, 180f, 180f));
-			newObject.AddComponent<minion> ().thisType = food.strawberry;
-			newObject.GetComponent<minion> ().mappingValue (food.strawberry);
-			costMoney(costList(newObject.GetComponent<minion>().returnFoodType()));
-			//gameObject.GetComponent<Button>()
-		}
-        else if(index == 3)
-        {
-            GameObject newObject = (GameObject)Instantiate(minion3, genePos, Quaternion.Euler(90f, 180f, 180f));
-            newObject.AddComponent<minion>().thisType = food.apple;
-            newObject.GetComponent<minion>().mappingValue(food.apple);
-            costMoney(costList(newObject.GetComponent<minion>().returnFoodType()));
-        }
+            if (index == 1)
+            {
+                //banana
+                if (!costMoney(costList(food.banana)))
+                {
+                    return;
+                }
+                GameObject newObject = (GameObject)Instantiate(minion1, genePos, Quaternion.Euler(0f, 0f, 0f));
+                newObject.AddComponent<Ally>().thisType = food.banana;
+                newObject.GetComponent<Ally>().setPathIndex(pathIndex);
+                newObject.GetComponent<Ally>().mappingValue(food.banana);
+                
+            }
+            else if (index == 2)
+            {
+                //strawberry
+                if (!costMoney(costList(food.strawberry)))
+                {
+                    return;
+                }
+                GameObject newObject = (GameObject)Instantiate(minion2, genePos, Quaternion.Euler(0f, 0f, 0f));
+                newObject.AddComponent<Ally>().thisType = food.strawberry;
+                newObject.GetComponent<Ally>().setPathIndex(pathIndex);
+                newObject.GetComponent<Ally>().mappingValue(food.strawberry);
+            }
+            else if (index == 3)
+            {
+                //apple
+                if (!costMoney(costList(food.apple)))
+                {
+                    return;
+                }
+                GameObject newObject = (GameObject)Instantiate(minion3, genePos, Quaternion.Euler(0f, 0f, 0f));
+                newObject.AddComponent<Ally>().thisType = food.apple;
+                newObject.GetComponent<Ally>().setPathIndex(pathIndex);
+                newObject.GetComponent<Ally>().mappingValue(food.apple);
+            }
     }
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    private void costMoney(int amount)
+    private bool costMoney(int amount)
     {
+        if((int.Parse(goldAmout.text) - amount) < 0)
+        {
+            falseSound.Play();
+            return false;
+        }
+
         goldAmout.text = (int.Parse(goldAmout.text) - amount).ToString();
 		GetComponent<AudioSource> ().Play ();
+        return true;
     }
     private int costList(food foodType)
     {

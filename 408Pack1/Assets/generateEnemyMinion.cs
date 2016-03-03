@@ -8,6 +8,7 @@ public class generateEnemyMinion : MonoBehaviour {
 	[SerializeField] private int enemyDifficulty = 1;
 
 	public Sprite[] sprites;
+    public int pathIndex;
 
 	private float startTime = 0f;
 	// Use this for initialization
@@ -21,6 +22,7 @@ public class generateEnemyMinion : MonoBehaviour {
 		startTime += Time.deltaTime;
 		if(startTime >= 5){
 			GameObject enemy = (GameObject)Instantiate (enemyMinions [0], gameObject.transform.position, Quaternion.Euler (0f, 0f, 0f));
+            enemy.GetComponent<Enemy>().setPathIndex(pathIndex);
 			enemy.GetComponent<SpriteRenderer> ().sprite = sprites [Random.Range (0, 6)];
 			startTime = 0f;
 		}
