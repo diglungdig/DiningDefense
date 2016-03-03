@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour {
 	Transform targetPathNode;
 	int pathNodeIndex = 0;
 
-	float speed = 5f;
+	float speed = 2f;
 
 	public float health = 1f;
 
@@ -54,14 +54,14 @@ public class Enemy : MonoBehaviour {
 
 			// Move towards node
 			transform.Translate( dir.normalized * distThisFrame, Space.World );
-			Quaternion targetRotation = Quaternion.LookRotation( dir );
-			this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, Time.deltaTime*5);
+			//Quaternion targetRotation = Quaternion.LookRotation( dir );
+			//this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, Time.deltaTime*5);
 		}
 
 	}
 
 	void ReachedGoal() {
-		GameObject.FindObjectOfType<ScoreManager2>().LoseLife();
+		//GameObject.FindObjectOfType<ScoreManager2>().LoseLife();
 		Destroy(gameObject);
 	}
 

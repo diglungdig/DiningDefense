@@ -8,7 +8,7 @@ namespace foodDefense
 
     public enum food
     {
-        banana, strawberry, apple, Kale, Spinach, Burger
+        banana, strawberry, apple, Kale, Spinach, Burger, icecream
     }
 		
     public class minion : MonoBehaviour
@@ -46,7 +46,7 @@ namespace foodDefense
 			
 		void OnTriggerEnter(Collider sth){
 			Debug.Log ("I collide !!!!!!!");
-			if ((sth.gameObject.tag == "enemyMinion" && thisType != food.Burger) || (sth.gameObject.tag == "allyMinion" && thisType == food.Burger)) {
+			if ((sth.gameObject.tag == "enemyMinion" && thisType != food.icecream) || (sth.gameObject.tag == "allyMinion" && thisType == food.icecream)) {
 				enemys.Add (sth.gameObject);
 				startCombat (sth.gameObject.GetComponent<minion> ().dmg);
 			}
@@ -97,7 +97,7 @@ namespace foodDefense
 		}
 
 		void OnTriggerExit(Collider sth){
-			if ((sth.gameObject.tag == "enemyMinion" && thisType != food.Burger) || (sth.gameObject.tag == "allyMinion" && thisType == food.Burger)) {
+			if ((sth.gameObject.tag == "enemyMinion" && thisType != food.icecream) || (sth.gameObject.tag == "allyMinion" && thisType == food.icecream)) {
 				Debug.Log ("exit this fking shit");
 				endCombat (false);
 			}
