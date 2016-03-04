@@ -23,7 +23,6 @@ public class Zoom : MonoBehaviour
     void Update()
     {
 
-       Debug.Log(Camera.main.orthographicSize);
        if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
            

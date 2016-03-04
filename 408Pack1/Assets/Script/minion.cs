@@ -55,7 +55,6 @@ namespace foodDefense
 
 
 		public void startCombat(float dmgReductionPerSec){
-			//switch material
 			//start coroutine
 			gameObject.GetComponent<AutoNav> ().stopAgent ();
 			//change the color of the object when entering combat

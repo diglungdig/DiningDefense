@@ -2,6 +2,7 @@
 using System.Collections;
 using foodDefense;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public abstract class Minions : MonoBehaviour {
 
@@ -10,19 +11,25 @@ public abstract class Minions : MonoBehaviour {
 
     public float health = 1f;
     public float dmg = 0f;
-
-    public int moneyValue = 1;
+    public int moneyValue = 0;
     public food thisType;
 
     public Transform targetPathNode;
     public int pathNodeIndex = 0;
     public float speed = 1f;
+    public bool inCombat = false;
+
+    public List<GameObject> opponents;
+
+    private float originalHealth = 1f;
 
     // Use this for initialization
     void Start()
     {
         pathGO = GameObject.Find("Path" + pathIndex.ToString());
         initilizePathNode();
+        opponents = new List<GameObject>();
+
     }
     public void setPathIndex(int index)
     {
@@ -41,18 +48,38 @@ public abstract class Minions : MonoBehaviour {
     {
         if (thisType == food.banana)
         {
-            this.dmg = 10f;
+            this.dmg = 1f;
             this.health = 60f;
+            this.originalHealth = 60f;
         }
         else if (thisType == food.apple)
         {
-            this.dmg = 8f;
-            this.health = 40f;
+            this.dmg = 4f;
+            this.health = 200f;
+            this.originalHealth = 200f;
+
         }
         else if (thisType == food.strawberry)
         {
-            this.dmg = 5f;
+            this.dmg = 1.5f;
             this.health = 30f;
+            this.originalHealth = 30f;
+
+        }
+        else if(thisType == food.Burger)
+        {
+            this.dmg = 2f;
+            this.health = 200f;
+            this.moneyValue = 200;
+            this.originalHealth = 200f;
+
+        }
+        else if(thisType == food.icecream)
+        {
+            this.dmg = 0.5f;
+            this.health = 50f;
+            this.originalHealth = 50f;
+            this.moneyValue = 80;
         }
     }
     public food returnFoodType()
@@ -63,46 +90,9 @@ public abstract class Minions : MonoBehaviour {
     public abstract void initilizePathNode();
     public abstract void GetNextPathNode();
     public abstract void ReachedGoal();
-
-    // Update is called once per frame
-    /*
-    void Update()
-    {
-        if (pathGO == null)
-            return;
-
-        if (targetPathNode == null)
-        {
-            GetNextPathNode();
-            if (targetPathNode == null)
-            {
-                // We've run out of path!
-                ReachedGoal();
-                return;
-            }
-        }
-
-        Vector3 dir = targetPathNode.position - this.transform.localPosition;
-
-        float distThisFrame = speed * Time.deltaTime;
-
-        if (dir.magnitude <= distThisFrame)
-        {
-            // We reached the node
-            targetPathNode = null;
-        }
-        else {
-            // TODO: Consider ways to smooth this motion.
-
-            // Move towards node
-            transform.Translate(dir.normalized * distThisFrame, Space.World);
-            //Quaternion targetRotation = Quaternion.LookRotation( dir );
-            //this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, Time.deltaTime*5);
-        }
-
-    }
-
-    */
+    public abstract void OnTriggerEnter2D(Collider2D sth);
+    public abstract void OnTriggerStay2D(Collider2D sth);
+    public abstract void OnTriggerExit2D(Collider2D sth);
 
     public void TakeDamage(float damage)
     {
@@ -111,12 +101,22 @@ public abstract class Minions : MonoBehaviour {
         {
             Die();
         }
+        transform.GetComponentInChildren<Image>().fillAmount = health / originalHealth;
     }
 
     public void Die()
     {
-        // TODO: Do this more safely!
-        GameObject.FindObjectOfType<ScoreManager2>().money += moneyValue;
+        Debug.Log(gameObject.name);
+        foreach(GameObject a in opponents)
+        {
+            a.GetComponent<Minions>().opponents.Remove(gameObject);
+            if (a.GetComponent<Minions>().opponents.Count == 0)
+            {
+                a.GetComponent<Minions>().OnTriggerExit2D(gameObject.GetComponent<BoxCollider2D>());
+            }
+        }
+
+        GameObject.Find("goldText").GetComponent<Text>().text = (int.Parse(GameObject.Find("goldText").GetComponent<Text>().text) + moneyValue).ToString();
         Destroy(gameObject);
     }
 }

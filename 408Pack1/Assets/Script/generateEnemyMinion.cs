@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using foodDefense;
+using System.Collections.Generic;
 
 public class generateEnemyMinion : MonoBehaviour {
 
@@ -28,12 +29,15 @@ public class generateEnemyMinion : MonoBehaviour {
             if (i == 6)
             {
                 enemy.GetComponent<Enemy>().thisType = food.Burger;
+                enemy.GetComponent<Enemy>().mappingValue(food.Burger);
             }
             else {
                 enemy.GetComponent<Enemy>().thisType = food.icecream;
+                enemy.GetComponent<Enemy>().mappingValue(food.icecream);
             }
+
             enemy.GetComponent<SpriteRenderer> ().sprite = sprites [i];
 			startTime = 0f;
 		}
-}
+    }
 }

@@ -24,7 +24,32 @@ public class Ally : Minions {
     public override void ReachedGoal()
     {
         Destroy(gameObject);
-        throw new NotImplementedException();
+    }
+
+    //collider and trigger functions overide
+    public override void OnTriggerEnter2D(Collider2D sth)
+    {
+        Debug.Log("enemy collides");
+        if (sth.gameObject.tag == "enemyMinion")
+        {
+            inCombat = true;
+            opponents.Add(sth.gameObject);
+        }
+    }
+    public override void OnTriggerStay2D(Collider2D sth)
+    {
+        Debug.Log("enemy stays");
+        if (sth.gameObject.tag == "enemyMinion")
+        {
+            TakeDamage(sth.GetComponent<Enemy>().dmg);
+        }
+    }
+    public override void OnTriggerExit2D(Collider2D sth)
+    {
+        if (sth.gameObject.tag == "enemyMinion")
+        {
+            inCombat = false;
+        }
     }
 
     void Update()
@@ -52,13 +77,9 @@ public class Ally : Minions {
             // We reached the node
             targetPathNode = null;
         }
-        else {
-            // TODO: Consider ways to smooth this motion.
-
+        else if(!inCombat){
             // Move towards node
             transform.Translate(dir.normalized * distThisFrame, Space.World);
-            //Quaternion targetRotation = Quaternion.LookRotation( dir );
-            //this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, Time.deltaTime*5);
         }
 
     }

@@ -30,6 +30,34 @@ public class Enemy : Minions {
         Destroy(gameObject);
     }
 
+   public override void OnTriggerEnter2D(Collider2D sth)
+    {
+        Debug.Log("enemy collides");
+        if(sth.gameObject.tag == "allyMinion")
+        {
+            inCombat = true;
+            GetComponent<Animator>().SetBool("inCombat", true);
+            opponents.Add(sth.gameObject);
+        }
+    }
+
+    public override void OnTriggerStay2D(Collider2D sth)
+    {
+        if (sth.gameObject.tag == "allyMinion")
+        {
+           TakeDamage(sth.GetComponent<Ally>().dmg);
+        }
+    }
+
+    public override void OnTriggerExit2D(Collider2D sth)
+    {
+        if (sth.gameObject.tag == "allyMinion")
+        {
+            GetComponent<Animator>().SetBool("inCombat", false);
+            inCombat = false;
+        }
+    }
+
     void Update()
     {
         if (pathGO == null)
@@ -40,12 +68,11 @@ public class Enemy : Minions {
             GetNextPathNode();
             if (targetPathNode == null)
             {
-                // We've run out of path!
+                // out of path
                 ReachedGoal();
                 return;
             }
         }
-
         Vector3 dir = targetPathNode.position - this.transform.localPosition;
 
         float distThisFrame = speed * Time.deltaTime;
@@ -55,13 +82,9 @@ public class Enemy : Minions {
             // We reached the node
             targetPathNode = null;
         }
-        else {
-            // TODO: Consider ways to smooth this motion.
-
+        else if(!inCombat){
             // Move towards node
             transform.Translate(dir.normalized * distThisFrame, Space.World);
-            //Quaternion targetRotation = Quaternion.LookRotation( dir );
-            //this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, Time.deltaTime*5);
         }
 
     }
