@@ -8,7 +8,7 @@ namespace foodDefense
 
     public enum food
     {
-        banana, strawberry, apple, Kale, Spinach, Burger, icecream
+        banana, strawberry, apple, Kale, Spinach, Burger, icecream, tower
     }
 		
     public class minion : MonoBehaviour
