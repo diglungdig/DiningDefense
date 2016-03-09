@@ -36,7 +36,6 @@ public class generateMinions : MonoBehaviour {
             newObject.AddComponent<Ally>().thisType = food.banana;
             newObject.GetComponent<Ally>().setPathIndex(pathIndex);
             newObject.GetComponent<Ally>().mappingValue(food.banana);
-
         }
         else if (index == 2)
         {
@@ -63,7 +62,6 @@ public class generateMinions : MonoBehaviour {
             newObject.GetComponent<Ally>().mappingValue(food.apple);
         }
 
-
         else if (index == 4)
         {
             if (!costMoney(costList(food.tower)))
@@ -80,6 +78,7 @@ public class generateMinions : MonoBehaviour {
                 else
                 {
                     StartCoroutine(towerTextWarning());
+					goldAmout.text = (int.Parse (goldAmout.text) + 300).ToString ();
                 }
 
             }

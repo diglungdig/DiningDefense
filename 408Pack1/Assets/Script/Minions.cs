@@ -51,20 +51,21 @@ public abstract class Minions : MonoBehaviour {
             this.dmg = 1f;
             this.health = 60f;
             this.originalHealth = 60f;
+			this.moneyValue = 10;
         }
         else if (thisType == food.apple)
         {
             this.dmg = 4f;
             this.health = 200f;
             this.originalHealth = 200f;
-
+			this.moneyValue = 20;
         }
         else if (thisType == food.strawberry)
         {
             this.dmg = 1.5f;
             this.health = 30f;
             this.originalHealth = 30f;
-
+			this.moneyValue = 15;
         }
         else if(thisType == food.Burger)
         {
