@@ -66,23 +66,27 @@ public class generateMinions : MonoBehaviour {
 
         else if (index == 4)
         {
-            if (!costMoney(costList(food.tower)))
+
+
+            if (!hasTower)
             {
-                return;
-            }
-            else
-            {
-                if (!hasTower)
+                if (!costMoney(costList(food.tower)))
                 {
+                    return;
+                }
+                else
+                {
+
                     hasTower = true;
                     tower.SetActive(true);
                 }
+
+            }
+
                 else
                 {
                     StartCoroutine(towerTextWarning());
                 }
-
-            }
 
         }
     }
