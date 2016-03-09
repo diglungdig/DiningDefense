@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+using UnityEngine.UI;
+using foodDefense;
 public class Ally : Minions {
     //public override int pathNodeIndex = 
+	//public Text goldAmout;
 
     public override void initilizePathNode()
     {
@@ -24,6 +26,7 @@ public class Ally : Minions {
     public override void ReachedGoal()
     {
         Destroy(gameObject);
+		GameObject.Find("goldText").GetComponent<Text>().text = (int.Parse(GameObject.Find("goldText").GetComponent<Text>().text) + moneyValue).ToString();
     }
 
     //collider and trigger functions overide
@@ -64,6 +67,7 @@ public class Ally : Minions {
             {
                 // We've run out of path!
                 ReachedGoal();
+
                 return;
             }
         }
