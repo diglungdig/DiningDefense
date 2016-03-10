@@ -84,7 +84,7 @@ public class generateMinions : MonoBehaviour {
                 else
                 {
                     StartCoroutine(towerTextWarning());
-					goldAmout.text = (int.Parse (goldAmout.text) + 300).ToString ();
+					//goldAmout.text = (int.Parse (goldAmout.text) + 300).ToString ();
                 }
 
         }
