@@ -7,6 +7,9 @@ public class Ally : Minions {
     //public override int pathNodeIndex = 
 	//public Text goldAmout;
 
+	public int scoreValue;
+	public GameObject gameController;
+
     public override void initilizePathNode()
     {
         pathNodeIndex = pathGO.transform.childCount - 1;
@@ -65,6 +68,8 @@ public class Ally : Minions {
             GetNextPathNode();
             if (targetPathNode == null)
             {
+				GameObject.Find("GameController").GetComponent<GameController>().AddScore(1);
+
                 // We've run out of path!
                 ReachedGoal();
 

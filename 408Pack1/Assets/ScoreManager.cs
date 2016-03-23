@@ -5,9 +5,25 @@ using System.Linq;
 public class ScoreManager : MonoBehaviour {
 
 	Dictionary<string, Dictionary<string, string>> playerScores; 
+	string name = "";
+	string score = "";
+	string date = "";
 
 	void Awake() {
 		//ClearScores ();
+		if(PlayerPrefs.HasKey("NAME")){
+			name = PlayerPrefs.GetString("NAME");
+		}
+		if(PlayerPrefs.HasKey("SCORE")){
+			score = PlayerPrefs.GetString("SCORE");
+			SetScore (name, "score", score);
+		}
+		if(PlayerPrefs.HasKey("DATE")){
+			date = PlayerPrefs.GetString("DATE");
+			SetScore (name, "date", date);
+		}
+
+
 		SetScore ("Mason", "score", "9001");
 		SetScore ("Mason", "date", "2/16/2016");
 		SetScore ("Bob", "score", "1");
