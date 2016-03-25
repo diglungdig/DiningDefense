@@ -16,6 +16,10 @@ public class pauseScript : MonoBehaviour {
 	public GameObject scoresMenu;
 	public GameObject settingsMenu;
 
+	public GameObject thirteenz;
+	public GameObject ninteenz;
+	public GameObject twelvez;
+	public GameObject thirtytwoz;
 
 	// Use this for initialization
 	void Start () {
@@ -79,12 +83,29 @@ public class pauseScript : MonoBehaviour {
 	}
 
 	public void ExitGame(){
-		Application.Quit ();
+		SceneManager.LoadScene (0);
 	}
 
 	public void PauseGame(){
 		pauseMenu.SetActive(true);
         Debug.Log("log log log");
         Time.timeScale = 0f;
+	}
+
+	public void thriteen(){
+		thirteenz.SetActive (true);
+		Screen.SetResolution(1366, 768, true);
+	}
+	public void nineteen(){
+		ninteenz.SetActive (true);
+		Screen.SetResolution(1920, 1080, true);
+	}
+	public void twelve(){
+		twelvez.SetActive(true);
+		Screen.SetResolution(1280, 800, true);
+	}
+	public void thirtytwo(){
+		thirtytwoz.SetActive (true);
+		Screen.SetResolution(320, 568, true);
 	}
 }
