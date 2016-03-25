@@ -88,6 +88,13 @@ public class generateMinions : MonoBehaviour {
                 }
 
         }
+        else if(index == 5 && hasTower)
+        {
+            if (costMoney(200))
+            {
+                tower.GetComponent<tower>().UpdateTurret();
+            }
+        }
     }
 
     IEnumerator towerTextWarning()
