@@ -19,10 +19,10 @@ public class reloadLevel : MonoBehaviour {
 		else
 			Debug.Log (System.DateTime.Now.ToString());
 		if(Score.text.Substring (6) != null)
-			PlayerPrefs.SetString ("SCORE", Score.text.Substring (6));  
+			PlayerPrefs.SetString ("SCORE", Score.text.Substring (6,1));  
 		else
 			Debug.Log (Score.text.Substring (6));
-        Time.timeScale = 1f;
+        Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
 }
