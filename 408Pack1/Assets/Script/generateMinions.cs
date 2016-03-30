@@ -13,18 +13,24 @@ public class generateMinions : MonoBehaviour {
     public GameObject minion3;
     public GameObject tower;
     public GameObject towerText;
+	public GameObject capWarningText;
     public Text goldAmout;
     public AudioSource falseSound;
     public int pathIndex;
+	public int minionsCount = 0;
 
+	public int minionCap = 10;
     private bool hasTower = false;
-    void Start()
+    
+	private bool buyDisable = false;
+	void Start()
     {
         genePos = geneSprite.position;
     }
 
     public void GenerateOne(int index)
     {
+		if(!buyDisable){
         if (index == 1)
         {
             //banana
@@ -32,6 +38,10 @@ public class generateMinions : MonoBehaviour {
             {
                 return;
             }
+
+			Debug.Log (minionsCount);
+
+			minionsCount++;
             GameObject newObject = (GameObject)Instantiate(minion1, genePos, Quaternion.Euler(0f, 0f, 0f));
             newObject.AddComponent<Ally>().thisType = food.banana;
             newObject.GetComponent<Ally>().setPathIndex(pathIndex);
@@ -44,6 +54,10 @@ public class generateMinions : MonoBehaviour {
             {
                 return;
             }
+
+			Debug.Log (minionsCount);
+
+			minionsCount++;
             GameObject newObject = (GameObject)Instantiate(minion2, genePos, Quaternion.Euler(0f, 0f, 0f));
             newObject.AddComponent<Ally>().thisType = food.strawberry;
             newObject.GetComponent<Ally>().setPathIndex(pathIndex);
@@ -56,6 +70,9 @@ public class generateMinions : MonoBehaviour {
             {
                 return;
             }
+
+			Debug.Log (minionsCount);
+			minionsCount++;
             GameObject newObject = (GameObject)Instantiate(minion3, genePos, Quaternion.Euler(0f, 0f, 0f));
             newObject.AddComponent<Ally>().thisType = food.apple;
             newObject.GetComponent<Ally>().setPathIndex(pathIndex);
@@ -83,7 +100,7 @@ public class generateMinions : MonoBehaviour {
 
                 else
                 {
-                    StartCoroutine(towerTextWarning());
+					StartCoroutine(TextWarning(towerText));
 					//goldAmout.text = (int.Parse (goldAmout.text) + 300).ToString ();
                 }
 
@@ -96,12 +113,13 @@ public class generateMinions : MonoBehaviour {
             }
         }
     }
+	}
 
-    IEnumerator towerTextWarning()
+	IEnumerator TextWarning(GameObject textWarning)
     {
-        towerText.SetActive(true);
+		textWarning.SetActive(true);
         yield return new WaitForSeconds(2f);
-        towerText.SetActive(false);
+		textWarning.SetActive(false);
     }
     private bool costMoney(int amount)
     {
@@ -126,4 +144,15 @@ public class generateMinions : MonoBehaviour {
         else if (foodType == food.tower) return 300;
         return 0;
     }
+
+	void Update(){
+
+		if (GameObject.FindGameObjectsWithTag ("allyMinion").Length == minionCap) {
+			buyDisable = true;
+			StartCoroutine (TextWarning (capWarningText));
+
+		} else {
+			buyDisable = false;
+		}
+	}
 }
