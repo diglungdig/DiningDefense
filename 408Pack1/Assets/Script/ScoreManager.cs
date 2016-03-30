@@ -11,26 +11,30 @@ public class ScoreManager : MonoBehaviour {
 
 	void Awake() {
 		//ClearScores ();
-		if(PlayerPrefs.HasKey("NAME")){
-			name = PlayerPrefs.GetString("NAME");
-		}
-		if(PlayerPrefs.HasKey("SCORE")){
-			score = PlayerPrefs.GetString("SCORE");
-			SetScore (name, "score", score);
-		}
-		if(PlayerPrefs.HasKey("DATE")){
-			date = PlayerPrefs.GetString("DATE");
-			SetScore (name, "date", date);
-		}
+			if (PlayerPrefs.HasKey ("NAME")) {
+				name = PlayerPrefs.GetString ("NAME");
+				Debug.Log (" name is " + name);
+			}
+			if (PlayerPrefs.HasKey ("SCORE")) {
+				score = PlayerPrefs.GetString ("SCORE");
+				SetScore (name, "score", score);
+				Debug.Log (" score is " + score);
+			}
+			if (PlayerPrefs.HasKey ("DATE")) {
+				date = PlayerPrefs.GetString ("DATE");
+				SetScore (name, "date", date);
+			}
 
-
+		/*
 		SetScore ("Mason", "score", "9001");
 		SetScore ("Mason", "date", "2/16/2016");
 		SetScore ("Bob", "score", "1");
 		SetScore ("Bob", "date", "2/13/2016");
 		SetScore ("John Cena", "score", "5");
 		SetScore ("John Cena", "date", "2/18/2016");
-		Debug.Log (GetScore ("Mason","score"));
+		*/
+		Debug.Log (name);
+		Debug.Log (GetScore (name,"score"));
 	}
 
 	public void Init() {
@@ -43,8 +47,8 @@ public class ScoreManager : MonoBehaviour {
 		playerScores.Remove (username);
 	}
 
-	public void ClearScores(){
-		playerScores.Clear ();
+	public static void ClearScores(){
+		//playerScores.Clear ();
 	}
 
 	public string GetScore(string username, string scoreType) {

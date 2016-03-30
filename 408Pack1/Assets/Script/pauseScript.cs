@@ -89,7 +89,6 @@ public class pauseScript : MonoBehaviour {
 	public void PauseGame(){
 		pauseMenu.SetActive(true);
         Debug.Log("log log log");
-        Time.timeScale = 0f;
 	}
 
 	public void thriteen(){

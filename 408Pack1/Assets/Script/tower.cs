@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Linq;
 
 public class tower : MonoBehaviour {
 
@@ -53,10 +54,13 @@ public class tower : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// TODO: Optimize this!
-		Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
+		Minions[] enemies = GameObject.FindObjectsOfType<Enemy>() ;
+		Minions[] allies = GameObject.FindObjectsOfType<Ally> ();
 
 		Enemy nearestEnemy = null;
+		Ally nearestAlly = null;
 		float dist = Mathf.Infinity;
+		float dist2 = Mathf.Infinity;
 
 		foreach(Enemy e in enemies) {
 			float d = Vector3.Distance(this.transform.position, e.transform.position);
@@ -65,21 +69,44 @@ public class tower : MonoBehaviour {
 				dist = d;
 			}
 		}
+		foreach(Ally e in allies) {
+			float d = Vector3.Distance(this.transform.position, e.transform.position);
+			if(nearestAlly == null || d < dist2) {
+				nearestAlly = e;
+				dist2 = d;
+			}
+		}
 
-		if(nearestEnemy == null) {
-			Debug.Log("No enemies?");
+		if (nearestEnemy == null && nearestAlly == null) {
 			return;
 		}
 
-        Vector3 dir = nearestEnemy.transform.position - this.transform.position;
+		if (nearestEnemy != null) {
+			Vector3 dir = nearestEnemy.transform.position - this.transform.position;
 
-        fireCooldownLeft -= Time.deltaTime;
-		if(fireCooldownLeft <= 0 && dir.magnitude <= range) {
-			fireCooldownLeft = fireCooldown;
-			ShootAt(nearestEnemy);
+			fireCooldownLeft -= Time.deltaTime;
+			if(fireCooldownLeft <= 0 && dir.magnitude <= range) {
+				fireCooldownLeft = fireCooldown;
+				ShootAt(nearestEnemy);
+			}
+		}
+			
+		if (nearestAlly != null) {
+			Vector3 dir2 = nearestAlly.transform.position - this.transform.position;
+			fireCooldownLeft -= Time.deltaTime;
+			if (fireCooldownLeft <= 0 && dir2.magnitude <= range) {
+				fireCooldownLeft = fireCooldown;
+				ShootAt (nearestAlly);
+			}
 		}
 	}
-		void ShootAt(Enemy e) {
+	void ShootAt(Enemy e) {
+		GameObject bulletGO = (GameObject)Instantiate(bulletPrefab[currentBulletVer], this.transform.position, this.transform.rotation);
+
+		Bullet b = bulletGO.GetComponent<Bullet>();
+		b.target = e.transform;
+	}
+	void ShootAt(Ally e) {
 		GameObject bulletGO = (GameObject)Instantiate(bulletPrefab[currentBulletVer], this.transform.position, this.transform.rotation);
 
 		Bullet b = bulletGO.GetComponent<Bullet>();

@@ -29,7 +29,7 @@ public class sceneManage : MonoBehaviour {
     {
         timeLeft -= Time.deltaTime;
         timerText.text = Mathf.RoundToInt(timeLeft).ToString();
-        if (timeLeft < 0f)
+        if (timeLeft < -10000f)
         {
             Time.timeScale = 0f;
             victoryPanel.SetActive(true);

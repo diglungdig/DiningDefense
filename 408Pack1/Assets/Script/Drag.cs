@@ -22,15 +22,13 @@ public class Drag : MonoBehaviour
 
             Debug.Log(pos.y);
 
-            if ((Camera.main.transform.position.y >= 3 && pos.y < 0) || (Camera.main.transform.position.y <= -3 && pos.y > 0)
-                || (Camera.main.transform.position.y < 3 && Camera.main.transform.position.y > -3))
-            {
+           
 
-                //Vector3 move = new Vector3 (0, 0, pos.y * dragSpeed);
-                Vector3 move = new Vector3(0, pos.y * dragSpeed, 0);
+            //Vector3 move = new Vector3 (0, 0, pos.y * dragSpeed);
+            Vector3 move = new Vector3(0, pos.y * dragSpeed, 0);
 
-                transform.Translate(move, Space.World);
-            }
+            transform.Translate(move, Space.World);
+           
         }
 
     }

@@ -12,7 +12,7 @@ public class Zoom : MonoBehaviour
 
     void ZoomIn()
     {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, -3f), 1 / 3f);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, 1000f), 1 / 3f);
     }
 
     void ZoomOut()

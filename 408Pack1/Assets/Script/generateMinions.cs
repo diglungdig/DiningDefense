@@ -16,85 +16,76 @@ public class generateMinions : MonoBehaviour {
     public Text goldAmout;
     public AudioSource falseSound;
     public int pathIndex;
+	public int strawberryCount;
 
     private bool hasTower = false;
     void Start()
     {
         genePos = geneSprite.position;
+		strawberryCount = 0;
     }
 
     public void GenerateOne(int index)
     {
-        if (index == 1)
-        {
-            //banana
-            if (!costMoney(costList(food.banana)))
-            {
-                return;
-            }
-            GameObject newObject = (GameObject)Instantiate(minion1, genePos, Quaternion.Euler(0f, 0f, 0f));
-            newObject.AddComponent<Ally>().thisType = food.banana;
-            newObject.GetComponent<Ally>().setPathIndex(pathIndex);
-            newObject.GetComponent<Ally>().mappingValue(food.banana);
-        }
-        else if (index == 2)
-        {
-            //strawberry
-            if (!costMoney(costList(food.strawberry)))
-            {
-                return;
-            }
-            GameObject newObject = (GameObject)Instantiate(minion2, genePos, Quaternion.Euler(0f, 0f, 0f));
-            newObject.AddComponent<Ally>().thisType = food.strawberry;
-            newObject.GetComponent<Ally>().setPathIndex(pathIndex);
-            newObject.GetComponent<Ally>().mappingValue(food.strawberry);
-        }
-        else if (index == 3)
-        {
-            //apple
-            if (!costMoney(costList(food.apple)))
-            {
-                return;
-            }
-            GameObject newObject = (GameObject)Instantiate(minion3, genePos, Quaternion.Euler(0f, 0f, 0f));
-            newObject.AddComponent<Ally>().thisType = food.apple;
-            newObject.GetComponent<Ally>().setPathIndex(pathIndex);
-            newObject.GetComponent<Ally>().mappingValue(food.apple);
-        }
+		for (int i = 0; i < 4; i++) {
+			if (index == 2 && strawberryCount == 5) {
+				index = 3;
+				strawberryCount = 0;
+			}
+			if (index == 1) {
+				//banana
+				if (!costMoney (costList (food.banana))) {
+					return;
+				}
 
-        else if (index == 4)
-        {
+				GameObject newObject = (GameObject)Instantiate (minion1, genePos, Quaternion.Euler (0f, 0f, 0f));
+				newObject.AddComponent<Ally> ().thisType = food.banana;
+				newObject.GetComponent<Ally> ().setPathIndex (pathIndex);
+				newObject.GetComponent<Ally> ().mappingValue (food.banana);
+				if(GameObject.FindGameObjectsWithTag("allyMinion").Length >= 3)
+					newObject.transform.localScale += new Vector3(2.0F, 2.0F, 0);
+			} else if (index == 2) {
+				strawberryCount++;
+				//strawberry
 
+				if (!costMoney (costList (food.strawberry))) {
+					return;
+				}
+				GameObject newObject = (GameObject)Instantiate (minion2, genePos, Quaternion.Euler (0f, 0f, 0f));
+				newObject.AddComponent<Ally> ().thisType = food.strawberry;
+				newObject.GetComponent<Ally> ().setPathIndex (pathIndex);
+				newObject.GetComponent<Ally> ().mappingValue (food.strawberry);
+			} else if (index == 3) {
+				//apple
+				if (!costMoney (costList (food.strawberry))) {
+					return;
+				}
+				GameObject newObject = (GameObject)Instantiate (minion2, genePos, Quaternion.Euler (0f, 0f, 0f));
+				newObject.AddComponent<Ally> ().thisType = food.strawberry;
+				newObject.GetComponent<Ally> ().setPathIndex (pathIndex);
+				newObject.GetComponent<Ally> ().mappingValue (food.strawberry);
+			} else if (index == 4) {
 
-            if (!hasTower)
-            {
-                if (!costMoney(costList(food.tower)))
-                {
-                    return;
-                }
-                else
-                {
+				if (!hasTower) {
+					if (!costMoney (costList (food.tower))) {
+						return;
+					} else {
 
-                    hasTower = true;
-                    tower.SetActive(true);
-                }
+						hasTower = true;
+						tower.SetActive (true);
+					}
 
-            }
-
-                else
-                {
-                    StartCoroutine(towerTextWarning());
+				} else {
+					StartCoroutine (towerTextWarning ());
 					//goldAmout.text = (int.Parse (goldAmout.text) + 300).ToString ();
-                }
+				}
 
-        }
-        else if(index == 5 && hasTower)
-        {
-            if (costMoney(200))
-            {
-                tower.GetComponent<tower>().UpdateTurret();
-            }
-        }
+			} else if (index == 5 && hasTower) {
+				if (costMoney (200)) {
+					tower.GetComponent<tower> ().UpdateTurret ();
+				}
+			}
+		}
     }
 
     IEnumerator towerTextWarning()
@@ -108,7 +99,7 @@ public class generateMinions : MonoBehaviour {
         if((int.Parse(goldAmout.text) - amount) < 0)
         {
             falseSound.Play();
-            return false;
+            
         }
 
         goldAmout.text = (int.Parse(goldAmout.text) - amount).ToString();

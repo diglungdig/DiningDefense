@@ -86,10 +86,10 @@ public class Ally : Minions {
             // We reached the node
             targetPathNode = null;
         }
-        else if(!inCombat){
-            // Move towards node
-            transform.Translate(dir.normalized * distThisFrame, Space.World);
-        }
+        
+        // Move towards node
+        transform.Translate(dir.normalized * distThisFrame, Space.World);
+        
 
     }
 }

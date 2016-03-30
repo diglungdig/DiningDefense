@@ -82,10 +82,8 @@ public class Enemy : Minions {
             // We reached the node
             targetPathNode = null;
         }
-        else if(!inCombat){
-            // Move towards node
-            transform.Translate(dir.normalized * distThisFrame, Space.World);
-        }
+
+        transform.Translate(dir.normalized * distThisFrame, Space.World);
 
     }
 }

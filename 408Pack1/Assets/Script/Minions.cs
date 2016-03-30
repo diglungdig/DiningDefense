@@ -51,7 +51,7 @@ public abstract class Minions : MonoBehaviour {
             this.dmg = 1f;
             this.health = 60f;
             this.originalHealth = 60f;
-			this.moneyValue = 10;
+			this.moneyValue = 20;
         }
         else if (thisType == food.apple)
         {
@@ -115,9 +115,10 @@ public abstract class Minions : MonoBehaviour {
             {
                 a.GetComponent<Minions>().OnTriggerExit2D(gameObject.GetComponent<BoxCollider2D>());
             }
-        }
+		}
+		Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>() ;
 
         GameObject.Find("goldText").GetComponent<Text>().text = (int.Parse(GameObject.Find("goldText").GetComponent<Text>().text) + moneyValue).ToString();
-        Destroy(gameObject);
+        Destroy(this);
     }
 }
